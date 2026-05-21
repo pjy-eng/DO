@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+:root {
+  --color-bg: #f0f2f5;
+  --color-bg-card: rgba(255, 255, 255, 0.72);
+  --color-text-primary: #2d3a4a;
+  --color-text-secondary: #6b7a8d;
+  --color-text-muted: #9aa5b4;
+  --color-dusty-blue: #7a9bb5;
+  --color-sage: #8aab96;
+  --color-aurora: #6db8c4;
+  --color-silver: #c8d4e0;
+  --color-nebula-bg: #0d1321;
+  --color-nebula-mid: #162032;
+  --color-nebula-glow: #1e3a5f;
+  --radius-card: 1.5rem;
+  --shadow-card: 0 4px 24px rgba(45, 58, 74, 0.08), 0 1px 4px rgba(45, 58, 74, 0.04);
+  --shadow-float: 0 12px 40px rgba(45, 58, 74, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: 
+    radial-gradient(ellipse at 20% 20%, rgba(122, 155, 181, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(138, 171, 150, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse at 60% 10%, rgba(109, 184, 196, 0.05) 0%, transparent 50%),
+    #eff1f5;
+  min-height: 100vh;
+}
+
+/* scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-silver); border-radius: 2px; }
+
+/* glass card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.glass-card-dark {
+  background: rgba(22, 32, 50, 0.55);
+  backdrop-filter: blur(20px) saturate(1.1);
+  -webkit-backdrop-filter: blur(20px) saturate(1.1);
+  border: 1px solid rgba(122, 155, 181, 0.18);
+  border-radius: var(--radius-card);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* brain dump glow */
+@keyframes brainDumpGlow {
+  0% { box-shadow: 0 0 0 0 rgba(109, 184, 196, 0); }
+  50% { box-shadow: 0 0 0 8px rgba(109, 184, 196, 0.15); }
+  100% { box-shadow: 0 0 0 16px rgba(109, 184, 196, 0); }
+}
+
+.brain-dump-success {
+  animation: brainDumpGlow 0.8s ease-out forwards;
+}
+
+/* star pulse */
+@keyframes starPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+/* task complete shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* breathing glow for input */
+@keyframes breatheGlow {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(109, 184, 196, 0.2); }
+  50% { box-shadow: 0 0 0 4px rgba(109, 184, 196, 0.35), 0 0 12px rgba(109, 184, 196, 0.15); }
+}
+
+.breathe-focus:focus {
+  animation: breatheGlow 2s ease-in-out infinite;
+  outline: none;
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* count-up number */
+.count-up-number {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* nebula text */
+.nebula-title {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+}
+
+/* tag button */
+.mood-tag {
+  transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.mood-tag:hover {
+  transform: translateY(-1px);
+}
+.mood-tag.selected {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 2px rgba(109, 184, 196, 0.4), 0 4px 12px rgba(109, 184, 196, 0.2);
+}
+
+/* timeline dot */
+.timeline-dot {
+  position: relative;
+}
+.timeline-dot::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-dusty-blue);
+  box-shadow: 0 0 0 3px rgba(122, 155, 181, 0.15);
+}
+
+/* type colors */
+.type-focus { border-left-color: #7a9bb5; }
+.type-rest { border-left-color: #8aab96; }
+.type-soft { border-left-color: #b5a1c8; }
+.type-admin { border-left-color: #c4a87a; }
+.type-life { border-left-color: #6db8c4; }
+
+.type-badge-focus { background: rgba(122, 155, 181, 0.12); color: #5a7a95; }
+.type-badge-rest { background: rgba(138, 171, 150, 0.12); color: #6a8c76; }
+.type-badge-soft { background: rgba(181, 161, 200, 0.12); color: #8a6aa0; }
+.type-badge-admin { background: rgba(196, 168, 122, 0.12); color: #9a7a52; }
+.type-badge-life { background: rgba(109, 184, 196, 0.12); color: #4a9aaa; }
